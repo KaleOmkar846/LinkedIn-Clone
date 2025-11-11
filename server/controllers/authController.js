@@ -1,5 +1,5 @@
-import User from '../models/User.js';
-import { registerSchema, loginSchema } from '../validators/authValidator.js';
+import User from "../models/User.js";
+import { registerSchema, loginSchema } from "../validators/authValidator.js";
 
 /**
  * Register a new user
@@ -18,7 +18,7 @@ export const register = async (req, res) => {
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: 'User already exists' });
+      return res.status(400).json({ error: "User already exists" });
     }
 
     // Register new user
@@ -28,15 +28,19 @@ export const register = async (req, res) => {
     // Log the user in immediately
     req.login(newUser, (err) => {
       if (err) {
-        return res.status(500).json({ error: 'Error logging in after registration' });
+        console.error("Error logging in after registration:", err);
+        return res
+          .status(500)
+          .json({ error: "Error logging in after registration" });
       }
       return res.status(201).json({
-        message: 'User registered successfully',
+        message: "User registered successfully",
         user: { email: newUser.email, _id: newUser._id },
       });
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Registration error:", err);
+    res.status(500).json({ error: err.message || "Registration failed" });
   }
 };
 
@@ -51,19 +55,19 @@ export const login = (req, res, next, passport) => {
     return res.status(400).json({ error: error.details[0].message });
   }
 
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate("local", (err, user, info) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ error: "Invalid email or password" });
     }
     req.login(user, (err) => {
       if (err) {
-        return res.status(500).json({ error: 'Error logging in' });
+        return res.status(500).json({ error: "Error logging in" });
       }
       return res.json({
-        message: 'Logged in successfully',
+        message: "Logged in successfully",
         user: { email: user.email, _id: user._id },
       });
     });
@@ -77,13 +81,13 @@ export const login = (req, res, next, passport) => {
 export const logout = (req, res) => {
   req.logout((err) => {
     if (err) {
-      return res.status(500).json({ error: 'Error logging out' });
+      return res.status(500).json({ error: "Error logging out" });
     }
     req.session.destroy((err) => {
       if (err) {
-        return res.status(500).json({ error: 'Error destroying session' });
+        return res.status(500).json({ error: "Error destroying session" });
       }
-      res.json({ message: 'Logged out successfully' });
+      res.json({ message: "Logged out successfully" });
     });
   });
 };
@@ -94,7 +98,7 @@ export const logout = (req, res) => {
  */
 export const getCurrentUser = (req, res) => {
   if (!req.isAuthenticated()) {
-    return res.status(401).json({ error: 'Not authenticated' });
+    return res.status(401).json({ error: "Not authenticated" });
   }
   res.json({
     user: { email: req.user.email, _id: req.user._id },

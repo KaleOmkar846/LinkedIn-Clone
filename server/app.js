@@ -57,4 +57,8 @@ app.use((err, req, res, next) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`✓ Server running on port ${PORT}`);
+  console.log(`✓ Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(
+    `✓ CORS origin: ${process.env.CLIENT_URL || "http://localhost:5173"}`
+  );
 });

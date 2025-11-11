@@ -1,11 +1,23 @@
 import session from "express-session";
 import MongoStore from "connect-mongo";
 
+const mongoUrl =
+  process.env.ATLASDB_URL || "mongodb://localhost:27017/linkedin-clone";
+const sessionSecret =
+  process.env.SESSION_SECRET || "your-secret-key-change-this";
+
+// Warn if using default session secret in production
+if (
+  process.env.NODE_ENV === "production" &&
+  sessionSecret === "your-secret-key-change-this"
+) {
+  console.warn("⚠️  WARNING: Using default SESSION_SECRET in production!");
+}
+
 const store = MongoStore.create({
-  mongoUrl:
-    process.env.ATLASDB_URL || "mongodb://localhost:27017/linkedin-clone",
+  mongoUrl: mongoUrl,
   crypto: {
-    secret: process.env.SESSION_SECRET,
+    secret: sessionSecret,
   },
   touchAfter: 24 * 3600, // time period in seconds
 });
@@ -19,7 +31,7 @@ store.on("error", function (e) {
 export const sessionConfig = {
   store: store,
   name: "session", // Custom session name
-  secret: process.env.SESSION_SECRET || "your-secret-key-change-this",
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   cookie: {
