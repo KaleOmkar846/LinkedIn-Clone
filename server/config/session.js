@@ -18,6 +18,7 @@ store.on("error", function (e) {
  */
 export const sessionConfig = {
   store: store,
+  name: "session", // Custom session name
   secret: process.env.SESSION_SECRET || "your-secret-key-change-this",
   resave: false,
   saveUninitialized: false,
@@ -25,6 +26,7 @@ export const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24, // 24 hours
     httpOnly: true,
     secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Allow cross-origin cookies in production
   },
 };
 
