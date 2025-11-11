@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 
 import express from "express";
 import cors from "cors";
+import mongoose from "mongoose";
 import passport from "./config/passport.js";
 import connectDB from "./config/database.js";
 import sessionMiddleware from "./config/session.js";
@@ -43,6 +44,39 @@ app.use(passport.session());
 // Routes
 app.get("/", (req, res) => {
   res.json({ message: "LinkedIn Clone API" });
+});
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  const health = {
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    database: "unknown",
+    session: "unknown",
+  };
+
+  // Check MongoDB connection
+  if (mongoose.connection.readyState === 1) {
+    health.database = "connected";
+  } else {
+    health.database = "disconnected";
+    health.status = "error";
+  }
+
+  // Check if session secret is set
+  if (
+    process.env.SESSION_SECRET &&
+    process.env.SESSION_SECRET !== "your-secret-key-change-this"
+  ) {
+    health.session = "configured";
+  } else {
+    health.session = "not_configured";
+    health.status = "warning";
+  }
+
+  const statusCode = health.status === "error" ? 503 : 200;
+  res.status(statusCode).json(health);
 });
 
 app.use("/api/users", authRoutes);

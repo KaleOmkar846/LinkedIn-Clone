@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { API_BASE_URL } from '../constants';
+import axios from "axios";
+import { API_BASE_URL } from "../constants";
 
 // Create axios instance with default configuration
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -29,8 +29,12 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // Handle common errors here
     if (error.response?.status === 401) {
-      // Handle unauthorized access
-      console.error('Unauthorized access');
+      // Only log if it's not the /me endpoint (checking auth status)
+      const isCheckingAuth = error.config?.url?.includes("/api/users/me");
+      if (!isCheckingAuth) {
+        console.error("Unauthorized access");
+      }
+      // Silently handle 401 on auth check
     }
     return Promise.reject(error);
   }
