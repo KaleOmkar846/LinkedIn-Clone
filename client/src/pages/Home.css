@@ -1,0 +1,225 @@
+/* Home Container Styles */
+.home-container {
+  max-width: 1128px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 225px 1fr 310px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: sticky;
+  top: 76px;
+}
+
+.sidebar-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.sidebar-profile {
+  text-align: center;
+  padding: 0 0 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.sidebar-profile-bg {
+  height: 54px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 100%), 
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="54" viewBox="0 0 300 54"><rect fill="%23a0b4b7" width="300" height="54"/></svg>');
+  background-size: cover;
+}
+
+.sidebar-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin: -38px auto 8px;
+  position: relative;
+}
+
+.sidebar-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  margin-bottom: 4px;
+  padding: 0 12px;
+}
+
+.sidebar-title {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0 12px;
+  line-height: 1.4;
+}
+
+.sidebar-stats {
+  padding: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0 -12px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.sidebar-stat:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-stat-number {
+  color: #0a66c2;
+  font-weight: 600;
+}
+
+.sidebar-premium {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sidebar-premium:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-premium::before {
+  content: "⭐";
+  font-size: 16px;
+}
+
+.sidebar-links {
+  padding: 8px 0;
+}
+
+.sidebar-link {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+/* Main Feed Styles */
+.main-feed {
+  min-height: 400px;
+}
+
+.home-content h1 {
+  display: none;
+}
+
+/* Right Sidebar / News Panel */
+.right-sidebar {
+  position: sticky;
+  top: 76px;
+}
+
+.news-panel {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px 16px 16px;
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.news-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.news-item {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.news-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  margin-bottom: 4px;
+}
+
+.news-item-meta {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .home-container {
+    grid-template-columns: 1fr 310px;
+    gap: 16px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    padding: 16px 8px;
+  }
+
+  .right-sidebar {
+    display: none;
+  }
+}

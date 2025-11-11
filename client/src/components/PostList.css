@@ -1,0 +1,47 @@
+/* Post List Styles */
+.post-list {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.post-list h3 {
+  display: none;
+}
+
+/* Loading and Empty States */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+}
+
+.loading::before {
+  display: none;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 40px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.no-posts::before {
+  display: none;
+}
+
+.error-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  border: 1px solid #ffeeba;
+}

@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "LinkedIn Clone",
+      "path": "."
+    },
+    {
+      "name": "Client (Frontend)",
+      "path": "client"
+    },
+    {
+      "name": "Server (Backend)",
+      "path": "server"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true
+    }
+  }
+}
